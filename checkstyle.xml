@@ -3,6 +3,7 @@
         "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
         "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
+
 <module name="Checker">
 
     <property name="charset" value="UTF-8"/>
@@ -15,7 +16,7 @@
 
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
-        <property name="max" value="80"/>
+        <property name="max" value="100"/>
     </module>
     <!-- Checks for Headers                                -->
     <!-- See http://checkstyle.sf.net/config_header.html   -->
