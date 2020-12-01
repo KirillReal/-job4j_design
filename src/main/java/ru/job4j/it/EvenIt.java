@@ -22,10 +22,9 @@ public class EvenIt implements Iterator<Integer>{
 
     @Override
     public Integer next() throws NoSuchElementException {
-        if (hasNext()) {
-            return numbers[pos++];
-        }else{
+        if (!hasNext()) {
             throw new NoSuchElementException("Больше чётных элементов нет");
         }
+        return numbers[pos++];
     }
 }
