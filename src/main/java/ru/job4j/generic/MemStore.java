@@ -7,14 +7,12 @@ public class MemStore <T extends Base> implements Store<T> {
     private final List<T> list = new ArrayList<>();
 
     private int indexOf(String id){
-        int indexOfList = - 1;
         for(int i = 0; i < list.size();i++){
-            if(this.list.get(i).equals(indexOfList)){
-                indexOfList = i;
-                break;
+            if(this.list.get(i).equals(id)){
+                return i;
             }
         }
-        return indexOfList;
+        return -1;
     }
     @Override
     public void add(T model) {
