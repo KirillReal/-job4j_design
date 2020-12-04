@@ -35,6 +35,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
             last = newEl;
         }else
             l.next = newEl;
+            last = newEl;
         size++;
         modCount++;
     }
