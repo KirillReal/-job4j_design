@@ -12,7 +12,7 @@ public class SimpleArray<T> implements Iterable<T>{
         modCount++;
     }
 
-    private SimpleArray(int size) {
+    private void SimpleArray(int size) {
         this.array = new Object[size];
         modCount++;
     }

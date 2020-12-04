@@ -8,7 +8,7 @@ public class MemStore <T extends Base> implements Store<T> {
 
     private int indexOf(String id){
         for(int i = 0; i < list.size();i++){
-            if(this.list.get(i).equals(id)){
+            if(this.list.get(i).getId().equals(id)){
                 return i;
             }
         }
