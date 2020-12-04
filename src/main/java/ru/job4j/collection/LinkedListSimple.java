@@ -30,9 +30,9 @@ public class LinkedListSimple<E> implements Iterable<E> {
     public void addLast(E e){
         final Node<E> l = last;
         final Node<E> newEl = new Node<>(l,e,null);
-        last = newEl;
         if(l == null){
             first = newEl;
+            last = newEl;
         }else
             l.next = newEl;
         size++;
@@ -42,7 +42,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
         Objects.checkIndex(index,size);
         Node<E> getEl = first;
         for(int i = 0; i < index;i++){
-            getEl = first.next;
+            getEl = getEl.next;
         }
         return getEl.item;
     }
