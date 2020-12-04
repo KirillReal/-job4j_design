@@ -12,7 +12,7 @@ public class SimpleArray<T> implements Iterable<T>{
         modCount++;
     }
 
-    public SimpleArray(int size) {
+    private SimpleArray(int size) {
         this.array = new Object[size];
         modCount++;
     }
@@ -40,9 +40,7 @@ public class SimpleArray<T> implements Iterable<T>{
             private final int expectedModCount = modCount;
             @Override
             public boolean hasNext() {
-                if(pos == size){
-                    throw new NoSuchElementException();
-                }else if(expectedModCount != modCount){
+                if(expectedModCount != modCount){
                     throw new ConcurrentModificationException();
                 }
                 return pos < size;
