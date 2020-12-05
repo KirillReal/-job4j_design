@@ -12,6 +12,7 @@ public class SimpleStack<T> {
         return size == 0;
     }
     public T pop() {
+        size--;
        return linked.deleteFirst();
     }
 
