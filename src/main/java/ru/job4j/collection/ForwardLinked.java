@@ -7,6 +7,10 @@ public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
     private int size = 0;
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+
     public void add(T value) {
         Node<T> node = new Node<T>(value, null);
         if (head == null) {
@@ -27,25 +31,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         final Node<T> node = head;
         head = node.next;
         node.next = null;
-        size--;
+        //size--;
         return node.value;
     }
 
-    public T deleteLast() {
-        Node<T> elem = head;
-        T rsl;
-        if(size == 1){
-           rsl = deleteFirst();
-        }else{
-            for (int i = 0; i < size - 2;i++){
-                elem = elem.next;
-            }
-            rsl = elem.next.value;
-            elem.next = null;
-            size--;
-        }
-        return rsl;
-    }
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
