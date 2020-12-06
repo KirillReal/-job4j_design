@@ -11,7 +11,7 @@ public class SimpleArray<T> implements Iterable<T>{
         this.array = new Object[size];
         modCount++;
     }
-    public T grow() {
+    private T grow() {
         if(size == array.length){
             this.array = Arrays.copyOf(array,array.length * 2);
         }
