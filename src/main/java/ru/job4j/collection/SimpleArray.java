@@ -11,11 +11,11 @@ public class SimpleArray<T> implements Iterable<T>{
         this.array = new Object[size];
         modCount++;
     }
-    private T grow() {
+    private Object grow() {
         if(size == array.length){
             this.array = Arrays.copyOf(array,array.length * 2);
         }
-        return (T) array;
+        return array;
     }
     public T get(int index) {
         Objects.checkIndex(index,size);
