@@ -11,6 +11,18 @@ public class SimpleSet<T> implements Iterable{
         this.size = size;
     }
 
+    boolean contains(T value) {
+        Iterator<T> it = array.iterator();
+        while (it.hasNext()) {
+            if (Objects.equals(it.next(), value)) {
+                return false;
+                //
+                // break;
+            }
+        }
+        return true;
+    }
+
     public void add(T value) {
         for (T t : array) {
             if (!Objects.equals(t, value)) {
