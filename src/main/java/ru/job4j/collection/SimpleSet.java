@@ -24,11 +24,9 @@ public class SimpleSet<T> implements Iterable{
     }
 
     public void add(T value) {
-        for (T t : array) {
-            if (!Objects.equals(t, value)) {
+            if (!contains(value)) {
                 array.add(value);
             }
-        }
     }
 
     @Override
