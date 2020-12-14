@@ -1,7 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
-import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public class Tree<E> implements SimpleTree<E> {
     private final Node<E> root;
@@ -24,23 +24,21 @@ public class Tree<E> implements SimpleTree<E> {
 
 
     public boolean isBinary() {
-        BiPredicate<Node<E>, E> func = (node, val) -> node.children.size() > 2;
-        return findElem(func, null).isEmpty();
+       return findElem((node) -> node.children.size() > 2).isEmpty();
     }
 
     @Override
     public Optional<Node<E>> findBy(E value) {
-        BiPredicate<Node<E>, E> func = (node, val) -> node.value.equals(val);
-        return findElem(func, value);
+        return findElem(eNode -> eNode.value.equals(value));
     }
 
-    public Optional<Node<E>> findElem(BiPredicate<Node<E>, E> func,E value) {
+    public Optional<Node<E>> findElem(Predicate<Node<E>> func) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.value.equals(value)) {
+            if (func.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
