@@ -4,41 +4,54 @@ import java.util.*;
 
 public class UserEmail {
     private String name;
-    private final List<String> address;
+    private Set<String> address;
 
-    public UserEmail (String name, List<String> address) {
+    public UserEmail (String name, Set<String> address) {
         this.name = name;
         this.address = address;
     }
+    public UserEmail () {
+
+    }
+
     public String getName() {
         return name;
     }
 
-    public List<String> getAddress() {
+    public Set<String> getAddress() {
         return address;
+    }
+
+    public void setAddress(Set<String> address) {
+        this.address = address;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-
-    public static Map<String, Set<String>> convert(List<UserEmail> input) {
-        Map<String, Set<String>> first = new HashMap<>();
-
+    public static void convert(List<UserEmail> input) {
+        Map<String, UserEmail> emails = new HashMap<>();
+        Map<UserEmail,UserEmail> temp = new HashMap<>();
+        Set<UserEmail> unique = new HashSet<>();
         for(UserEmail userEmail : input) {
-            Iterator<String> iterator = userEmail.getAddress().iterator();
-            Set<String> second = new HashSet<>(userEmail.getAddress());
-            if(!first.isEmpty()) {
-                for (Set<String> s : first.values()) {
-                    if (s.contains(iterator.next())) {
-                        s.addAll(userEmail.getAddress());
-                    }
+            boolean rsl = true;
+            for (String s: userEmail.getAddress()) {
+                UserEmail prevUser = emails.putIfAbsent(s,userEmail);
+                if (prevUser != null) {
+                    prevUser = temp.getOrDefault(prevUser,prevUser);
+                    prevUser.setAddress(userEmail.getAddress());
+                    temp.put(userEmail,prevUser);
+                    rsl = false;
                 }
-            }else {
-                first.put(userEmail.getName(), second);
+        }
+            if(rsl) {
+                unique.add(userEmail);
             }
         }
-        return first;
+        for (UserEmail user: unique) {
+            System.out.println(user.getName() + " " + user.getAddress());
+        }
     }
+
 }
