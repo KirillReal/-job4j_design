@@ -6,7 +6,6 @@ import java.util.TreeSet;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
-
         try (FileInputStream inStream = new FileInputStream("even.txt")) {
             Scanner scanner = new Scanner(System.in);
             scanner = new Scanner(inStream);
