@@ -20,7 +20,9 @@ public class Config {
                 String line = loadIn.readLine();
                 if(line.contains("=")) {
                     String[] splitLine = line.split("=");
-                    values.put(splitLine[0],splitLine[1]);
+                    if(splitLine.length == 2) {
+                        values.put(splitLine[0], splitLine[1]);
+                    }
                 }
             }
         }catch (Exception e) {
