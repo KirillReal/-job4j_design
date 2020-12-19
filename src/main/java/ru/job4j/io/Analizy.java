@@ -11,7 +11,6 @@ public class Analizy {
         ){
             String serverUnavailable = null;
             while (reader.ready()) {
-
                 String status = reader.readLine();
                 if(serverUnavailable == null && status.startsWith("400") || status.startsWith("500")) {
                     writer.write(status.split(" ")[1] + ";");
