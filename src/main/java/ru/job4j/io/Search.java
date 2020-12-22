@@ -12,8 +12,8 @@ public class Search {
         if(args.length != 2) {
             throw new IOException();
         }
-        Path start = Paths.get(" . ");
-        search(start, "js").forEach(System.out::println);
+        Path start = Paths.get(args[0]);
+        search(start, args[1]).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, String ext) throws IOException {
