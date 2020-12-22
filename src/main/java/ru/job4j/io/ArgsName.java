@@ -8,17 +8,20 @@ public class ArgsName {
 
     public String get(String key) {
 
-        return values.get(key);
+        String validate = values.get(key);
+        if(validate == null) {
+            throw new IllegalArgumentException();
+        }
+        return validate;
     }
 
     private void parse(String[] args) {
         for(String s : args) {
-            String[] arr = s.split(" = ");
+            String[] arr = s.split("=");
             if (arr.length != 2) {
                 throw new IllegalArgumentException();
-            }else {
-                values.put(arr[0].replaceFirst(" - ", " "),arr[1]);
             }
+            values.put(arr[0].replaceFirst("-", ""),arr[1]);
         }
     }
 
