@@ -7,7 +7,6 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-
         String validate = values.get(key);
         if(validate == null) {
             throw new IllegalArgumentException();
