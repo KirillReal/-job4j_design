@@ -1,8 +1,12 @@
-package ru.job4j.io;
+package ru.job4j.zip;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ArgZip {
+    private Map<String, String> map = new HashMap<>();
     private final String[] args;
 
     public ArgZip(String[] args) {
@@ -36,5 +40,13 @@ public class ArgZip {
             throw new IllegalArgumentException("Отсутсвует имя файла");
         }
         return str[1];
+    }
+    public void setValue() {
+        map.put("d",directory());
+        map.put("e",exclude());
+        map.put("o",output());
+    }
+    public String getValue(String key) {
+        return map.get(key);
     }
 }
