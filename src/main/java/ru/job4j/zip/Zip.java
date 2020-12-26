@@ -39,9 +39,6 @@ public class Zip {
     */
     public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
-        if (!argZip.valid()) {
-            return;
-        }
         argZip.setValue();
         List<Path> list = SimpleSearch.search(Paths.get(argZip.getValue("d")),(argZip.getValue("e")));
         new Zip().packFiles(list, new File(argZip.output()));

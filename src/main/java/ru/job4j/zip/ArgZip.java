@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public class ArgZip {
-    private Map<String, String> map = new HashMap<>();
+    private final Map<String, String> map = new HashMap<>();
     private final String[] args;
 
     public ArgZip(String[] args) {
