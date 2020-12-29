@@ -43,23 +43,23 @@ public class ConsoleChat {
     public void run() throws FileNotFoundException {
         boolean run = true;
         boolean pause = false;
-        StringBuilder stringBuilder = new StringBuilder();
+        List<String> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 String input = bufferedReader.readLine();
                 String bot = getAnswer();
                 if(input.equals(OUT)) {
                     run = false;
-                    stringBuilder.append(input).append(System.lineSeparator());
+                    list.add(input);
                 }else if (input.equals(STOP)) {
                     pause = true;
-                    stringBuilder.append(input).append(System.lineSeparator());
+                    list.add(input);
                 }else if(pause && input.equals(CONTINUE)) {
                     pause = false;
                 }
                 if (!pause && run) {
                     System.out.println(bot);
-                    stringBuilder.append(input + System.lineSeparator()
+                    list.add(input + System.lineSeparator()
                             + bot + System.lineSeparator());
                 }
 
