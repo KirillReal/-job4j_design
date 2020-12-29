@@ -1,46 +1,48 @@
 package ru.job4j.io;
 
-import java.io.File;
-import java.util.*;
-import java.util.Map.Entry;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Dublicate  {
-    public Dublicate() {
-        super();
+import static java.nio.file.FileVisitResult.CONTINUE;
+
+public class Dublicate implements FileVisitor<Path> {
+    private final Map<String,Path> metFiles = new HashMap<>();
+    private final List<Path> result = new ArrayList<>();
+
+    public List<Path> getDuplicates() {
+        return result;
     }
 
-    public static void main(String[] args) {
-        final Map<File,List<File>> duplicates = new HashMap<>();
-        Dublicate.handleDirectory(duplicates, new File("[path to base directory]"));
+    @Override
+    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+        return CONTINUE;
     }
-    private static void handleDirectory(final Map<File, List<File>> duplicates, final File directory) {
-        final Iterator<Entry<File, List<File>>> iterator = duplicates.entrySet().iterator();
-        while (iterator.hasNext()) {
-            final Entry<File, List<File>> next = iterator.next();
-            if(next.getValue().size() == 0) {
-                iterator.remove();
-            } else {
-                if (directory.isDirectory()) {
-                    final File[] files = directory.listFiles();
-                    assert files != null;
-                    for (final File file : files) {
-                        if (file.isDirectory()) {
-                            continue;
-                        }
-                        final File myFile = new File(file.getAbsolutePath());
-                        if (!duplicates.containsKey(myFile)) {
-                            duplicates.put(myFile, new Vector<>());
-                        } else {
-                            duplicates.get(myFile).add(myFile);
-                        }
-                    }
-                }
-                System.out.println(next.getKey() + " - " + next.getKey().getAbsolutePath());
-                for(final File file : next.getValue()) {
-                    System.out.println(file.getName() + " - " + file.getAbsolutePath());
-                }
-            }
+
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        Path filePath = metFiles.put(file.toFile().getName(),file);
+        if(filePath != null && filePath.toFile().length() == file.toFile().length()) {
+            result.add(file);
         }
 
+        return CONTINUE;
     }
+
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+        return CONTINUE;
+    }
+
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        return CONTINUE;
+    }
+
 }
