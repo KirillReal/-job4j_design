@@ -18,6 +18,7 @@ public class EchoServer {
                     String str;
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
+                        out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
                         if(str.equals("http://localhost:9000/?msg=Bye")) {
                             in.close();
                             out.close();
@@ -25,8 +26,7 @@ public class EchoServer {
                             server.close();
                         }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
-
+                    
                 }
             }
     }
