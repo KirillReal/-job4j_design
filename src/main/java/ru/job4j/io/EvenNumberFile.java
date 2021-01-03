@@ -10,12 +10,15 @@ public class EvenNumberFile {
             Scanner scanner = new Scanner(System.in);
             scanner = new Scanner(inStream);
             TreeSet<Integer> set = new TreeSet<>();
-            while (scanner.hasNext())
-            {
+            while (scanner.hasNext()) {
                 int data = scanner.nextInt();
-                if (data % 2 == 0) set.add(data);
+                if (data % 2 == 0) {
+                    set.add(data);
+                }
             }
-            for(int i : set) System.out.println(i);
+            for (int i : set) {
+                System.out.println(i);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

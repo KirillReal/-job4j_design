@@ -13,12 +13,11 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles implements FileVisitor<Path> {
 
-
     private final Predicate<Path> condition;
     private final List<Path> list = new ArrayList<>();
     private String str;
 
-    public SearchFiles (Predicate<Path> condition) {
+    public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
 
@@ -27,13 +26,14 @@ public class SearchFiles implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+            throws IOException {
         return CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if(condition.test(file)){
+        if (condition.test(file)) {
             this.list.add(file);
         }
         return CONTINUE;

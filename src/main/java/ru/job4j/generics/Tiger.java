@@ -1,5 +1,5 @@
 package ru.job4j.generics;
 
-public class Tiger extends Animal{
+public class Tiger extends Animal {
 
 }

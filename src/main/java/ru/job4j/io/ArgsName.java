@@ -8,19 +8,19 @@ public class ArgsName {
 
     public String get(String key) {
         String validate = values.get(key);
-        if(validate == null) {
+        if (validate == null) {
             throw new IllegalArgumentException();
         }
         return validate;
     }
 
     private void parse(String[] args) {
-        for(String s : args) {
+        for (String s : args) {
             String[] arr = s.split("=");
             if (arr.length != 2) {
                 throw new IllegalArgumentException();
             }
-            values.put(arr[0].replaceFirst("-", ""),arr[1]);
+            values.put(arr[0].replaceFirst("-", ""), arr[1]);
         }
     }
 

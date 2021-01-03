@@ -15,17 +15,18 @@ public class Config {
     }
 
     public void load() {
-        try(BufferedReader loadIn = new BufferedReader(new FileReader(path))){
-            while(loadIn.ready()) {
+        try
+                (BufferedReader loadIn = new BufferedReader(new FileReader(path))) {
+            while (loadIn.ready()) {
                 String line = loadIn.readLine();
-                if(line.contains("=")) {
+                if (line.contains("=")) {
                     String[] splitLine = line.split("=");
-                    if(splitLine.length == 2) {
+                    if (splitLine.length == 2) {
                         values.put(splitLine[0], splitLine[1]);
                     }
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

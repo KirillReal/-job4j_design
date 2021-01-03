@@ -13,7 +13,7 @@ public class ForwardLinkedReverse<T> implements Iterable {
             return;
         }
         Node<T> tail = head;
-        if(tail.next != null){
+        if (tail.next != null) {
             tail = tail.next;
         }
         tail.next = node;
@@ -22,7 +22,7 @@ public class ForwardLinkedReverse<T> implements Iterable {
     public void revert() {
         Node<T> reversedPart = null;
         Node<T> current = head;
-        while(current != null){
+        while (current != null) {
             Node<T> next = current.next;
             current.next = reversedPart;
             reversedPart = current;
@@ -32,9 +32,9 @@ public class ForwardLinkedReverse<T> implements Iterable {
     }
 
         @Override
-        public Iterator iterator () {
+        public Iterator iterator() {
             return new Iterator<T>() {
-                Node<T> node = head;
+               private Node<T> node = head;
                 @Override
                 public boolean hasNext() {
                     return node != null;
@@ -42,7 +42,7 @@ public class ForwardLinkedReverse<T> implements Iterable {
 
                 @Override
                 public T next() {
-                    if(!hasNext()){
+                    if (!hasNext()) {
                         throw new NoSuchElementException();
                     }
                     T value = node.value;
@@ -52,10 +52,9 @@ public class ForwardLinkedReverse<T> implements Iterable {
             };
         }
 
-
         private static class Node<T> {
-            T value;
-            Node<T> next;
+            private T value;
+           private Node<T> next;
 
             public Node(T value, Node<T> next) {
                 this.value = value;

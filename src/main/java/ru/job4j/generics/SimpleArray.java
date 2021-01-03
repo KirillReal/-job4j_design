@@ -11,26 +11,26 @@ public class SimpleArray<T> implements Iterable<T> {
         this.array =  new Objects[size];
     }
 
-    public void add(T model){
-        Objects.checkIndex(size,this.array.length);
+    public void add(T model) {
+        Objects.checkIndex(size, this.array.length);
         array[size++] = (Objects) model;
     }
 
-    public void set(int index,T model){
-        Objects.checkIndex(index,size);
+    public void set(int index, T model) {
+        Objects.checkIndex(index, size);
         this.array[index] = (Objects) model;
     }
 
-    public void remove(int index){
-        Objects.checkIndex(index,size);
+    public void remove(int index) {
+        Objects.checkIndex(index, size);
         array[index] = null;
-        System.arraycopy(array,index + 1,array,size,size - index);
+        System.arraycopy(array, index + 1, array, size, size - index);
         array[index - 1] = null;
         size--;
     }
 
-    public T get(int index){
-        Objects.checkIndex(index,size);
+    public T get(int index) {
+        Objects.checkIndex(index, size);
         return (T) array[index];
     }
 

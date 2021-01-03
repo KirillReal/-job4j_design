@@ -2,7 +2,7 @@ package ru.job4j.collection;
 
 import java.util.*;
 
-public class SimpleArray<T> implements Iterable<T>{
+public class SimpleArray<T> implements Iterable<T> {
     private int size = 0;
     private Object[] array;
     private int modCount = 0;
@@ -11,13 +11,16 @@ public class SimpleArray<T> implements Iterable<T>{
         this.array = new Object[size];
         modCount++;
     }
+
     private void grow() {
-        if(size == array.length){
-            this.array = Arrays.copyOf(array,array.length * 2);
+        if (size == array.length) {
+            this.array = Arrays.copyOf(array,
+                    array.length * 2);
         }
     }
+
     public T get(int index) {
-        Objects.checkIndex(index,size);
+        Objects.checkIndex(index, size);
         return (T) array[index];
     }
 
@@ -34,7 +37,7 @@ public class SimpleArray<T> implements Iterable<T>{
             private final int expectedModCount = modCount;
             @Override
             public boolean hasNext() {
-                if(expectedModCount != modCount){
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return pos < size;
@@ -42,7 +45,7 @@ public class SimpleArray<T> implements Iterable<T>{
 
             @Override
             public T next() {
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 return (T) array[pos++];

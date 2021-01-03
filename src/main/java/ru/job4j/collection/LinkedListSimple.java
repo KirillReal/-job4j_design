@@ -12,9 +12,9 @@ public class LinkedListSimple<E> implements Iterable<E> {
     private int modCount = 0;
 
     private static class Node<E> {
-        E item;
-        Node<E> next;
-        Node<E> prev;
+        private E item;
+        private Node<E> next;
+        private Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
@@ -23,26 +23,28 @@ public class LinkedListSimple<E> implements Iterable<E> {
         }
     }
 
-    public LinkedListSimple(){
-        this.first = new Node<>(null,null,null);
+    public LinkedListSimple() {
+        this.first = new Node<>(null, null, null);
     }
 
-    public void addLast(E e){
+    public void addLast(E e) {
         final Node<E> l = last;
-        final Node<E> newEl = new Node<>(l,e,null);
-        if(l == null){
+        final Node<E> newEl = new Node<>(l, e, null);
+        if (l == null) {
             first = newEl;
             last = newEl;
-        }else
+        } else {
             l.next = newEl;
             last = newEl;
+        }
         size++;
         modCount++;
     }
-    public E get(int index){
-        Objects.checkIndex(index,size);
+
+    public E get(int index) {
+        Objects.checkIndex(index, size);
         Node<E> getEl = first;
-        for(int i = 0; i < index;i++){
+        for (int i = 0; i < index; i++) {
             getEl = getEl.next;
         }
         return getEl.item;
@@ -55,7 +57,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
                 private final int expectedModCount = modCount;
                 @Override
                 public boolean hasNext() {
-                    if(expectedModCount != modCount){
+                    if (expectedModCount != modCount) {
                         throw new ConcurrentModificationException();
                     }
                     return result != null;
@@ -63,7 +65,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
 
                 @Override
                 public E next() {
-                    if(!hasNext()){
+                    if (!hasNext()) {
                         throw new NoSuchElementException();
                     }
                      E value = result.item;
@@ -72,6 +74,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
                 }
             };
         }
+
     public static void main(String[] args) {
         LinkedListSimple<String> data = new LinkedListSimple<>();
         data.addLast("A");

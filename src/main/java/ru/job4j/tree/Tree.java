@@ -15,21 +15,21 @@ public class Tree<E> implements SimpleTree<E> {
         if (findBy(child).isEmpty()) {
             Optional<Node<E>> node = findBy(parent);
             if (node.isPresent()) {
-               node.get().children.add(new Node<>(child));
+               node.get().getChildren().add(new Node<>(child));
                return true;
             }
         }
         return false;
     }
 
-
     public boolean isBinary() {
-       return findElem((node) -> node.children.size() > 2).isEmpty();
+       return findElem((node) ->
+               node.getChildren().size() > 2).isEmpty();
     }
 
     @Override
     public Optional<Node<E>> findBy(E value) {
-        return findElem(eNode -> eNode.value.equals(value));
+        return findElem(eNode -> eNode.getValue().equals(value));
     }
 
     public Optional<Node<E>> findElem(Predicate<Node<E>> func) {
@@ -42,7 +42,7 @@ public class Tree<E> implements SimpleTree<E> {
                 rsl = Optional.of(el);
                 break;
             }
-            data.addAll(el.children);
+            data.addAll(el.getChildren());
         }
         return rsl;
     }

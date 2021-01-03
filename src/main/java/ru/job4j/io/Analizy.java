@@ -8,14 +8,17 @@ public class Analizy {
                 new BufferedReader(
                         new FileReader(source)); PrintWriter writer =
                 new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))
-        ){
+        ) {
             String serverUnavailable = null;
             while (reader.ready()) {
                 String status = reader.readLine();
-                if(serverUnavailable == null && status.startsWith("400") || status.startsWith("500")) {
+                if (serverUnavailable == null
+                        && status.startsWith("400") || status.startsWith("500")) {
                     writer.write(status.split(" ")[1] + ";");
                     serverUnavailable = status;
-                }else if(serverUnavailable != null && (!status.isEmpty() && !status.startsWith("400") && !status.startsWith("500"))) {
+                } else if (serverUnavailable != null && (!status.isEmpty()
+                        && !status.startsWith("400")
+                        && !status.startsWith("500"))) {
                     writer.write(status.split(" ")[1]);
                     serverUnavailable = null;
                     writer.println();

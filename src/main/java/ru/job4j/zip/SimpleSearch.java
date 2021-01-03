@@ -19,9 +19,11 @@ public class SimpleSearch {
     static class SearchFiles extends SimpleFileVisitor<Path> {
         private final List<Path> pathsList = new ArrayList<>();
         private final String str;
+
         SearchFiles(String exc) {
             this.str = exc;
         }
+
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             if (!file.getFileName().toString().endsWith(str)) {
@@ -29,6 +31,7 @@ public class SimpleSearch {
             }
             return super.visitFile(file, attrs);
         }
+
         public List<Path> getPath() {
             return pathsList;
         }

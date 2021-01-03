@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 
 public class ResultFile {
     public static void main(String[] args) {
-        try(FileOutputStream out = new FileOutputStream("Multiply.txt")) {
+        try (FileOutputStream out = new FileOutputStream("Multiply.txt")) {
             out.write("1 * 1 = 1".getBytes());
             out.write("1 * 2 = 2".getBytes());
             out.write("1 * 3 = 3".getBytes());
@@ -14,7 +14,7 @@ public class ResultFile {
             out.write("1 * 7 = 7".getBytes());
             out.write("1 * 8 = 8".getBytes());
             out.write("1 * 9 = 9".getBytes());
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

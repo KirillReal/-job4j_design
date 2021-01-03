@@ -5,37 +5,37 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleHashMap<K,V> implements Iterable<SimpleHashMap.Node<K, V>> {
+public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node<K, V>> {
 
-    private Node<K,V>[] hashtable = new Node[16];
-    private static final float loadFactor = 0.75f;
-    private float thresholdValue = hashtable.length * loadFactor;
+    private static final float LOAD_FACTOR = 0.75f;
+    private Node<K, V>[] hashtable = new Node[16];
+    private float thresholdValue = hashtable.length * LOAD_FACTOR;
     private int size = 0;
     private int modCount = 0;
 
-    private int index (int hash) {
+    private int index(int hash) {
         return hash * (hashtable.length - 1);
     }
 
-    private void grow () {
-        Node<K,V>[] oldTable = hashtable;
+    private void grow() {
+        Node<K, V>[] oldTable = hashtable;
         int oldSize = oldTable.length;
         hashtable = new Node[oldSize * 2];
-        thresholdValue = hashtable.length * loadFactor;
-        for (int i = 0; i < oldSize;i++) {
-            if(oldTable[i] != null) {
-                K key = oldTable[i].getKey();
+        thresholdValue = hashtable.length * LOAD_FACTOR;
+        for (Node<K, V> kvNode : oldTable) {
+            if (kvNode != null) {
+                K key = kvNode.getKey();
                 int newIndex = index(hashKey(key));
-                hashtable[newIndex] = oldTable[i];
+                hashtable[newIndex] = kvNode;
             }
         }
     }
 
-    public boolean delete (K key) {
+    public boolean delete(K key) {
         int indexD;
         if (key != null) {
             indexD = index(hashKey(key));
-            if (hashtable[indexD] != null && Objects.equals(key,hashtable[indexD].key)) {
+            if (hashtable[indexD] != null && Objects.equals(key, hashtable[indexD].key)) {
                 hashtable[indexD] = null;
                 size--;
                 modCount++;
@@ -45,7 +45,7 @@ public class SimpleHashMap<K,V> implements Iterable<SimpleHashMap.Node<K, V>> {
         return false;
     }
 
-    public boolean insert (K key, V value) {
+    public boolean insert(K key, V value) {
         boolean check = false;
         if (size >= thresholdValue) {
             grow();
@@ -60,27 +60,29 @@ public class SimpleHashMap<K,V> implements Iterable<SimpleHashMap.Node<K, V>> {
         return check;
     }
 
-    public V get (K key) {
+    public V get(K key) {
         int indexGet;
         V result = null;
         if (key != null) {
             indexGet = index(hashKey(key));
-            if (hashtable[indexGet] != null && Objects.equals(key,hashtable[indexGet].key)) {
+            if (hashtable[indexGet] != null && Objects.equals(key, hashtable[indexGet].key)) {
                 result = hashtable[indexGet].value;
             }
         }
         return result;
     }
-    private int hashKey (K key) {
+
+    private int hashKey(K key) {
         int h;
         if (key != null) {
             h = key.hashCode();
             h = h ^ (h >>> 16);
-        }else{
+        } else {
             h = 0;
         }
         return h;
     }
+
     @Override
     public Iterator<SimpleHashMap.Node<K, V>> iterator() {
         return new Iterator<>() {
@@ -112,19 +114,18 @@ public class SimpleHashMap<K,V> implements Iterable<SimpleHashMap.Node<K, V>> {
         };
     }
 
-
     public static class Node<K, V> {
         private final K key;
         private final V value;
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(key, value);
-        }
-
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(key, value);
         }
 
         public K getKey() {

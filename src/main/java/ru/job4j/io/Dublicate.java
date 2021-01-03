@@ -13,7 +13,7 @@ import java.util.Map;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class Dublicate implements FileVisitor<Path> {
-    private final Map<String,Path> metFiles = new HashMap<>();
+    private final Map<String, Path> metFiles = new HashMap<>();
     private final List<Path> result = new ArrayList<>();
 
     public List<Path> getDuplicates() {
@@ -21,14 +21,15 @@ public class Dublicate implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+            throws IOException {
         return CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        Path filePath = metFiles.put(file.toFile().getName(),file);
-        if(filePath != null && filePath.toFile().length() == file.toFile().length()) {
+        Path filePath = metFiles.put(file.toFile().getName(), file);
+        if (filePath != null && filePath.toFile().length() == file.toFile().length()) {
             result.add(file);
         }
 

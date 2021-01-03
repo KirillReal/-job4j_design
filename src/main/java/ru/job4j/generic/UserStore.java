@@ -1,8 +1,9 @@
 package ru.job4j.generic;
 
-public class UserStore implements Store<User>{
+public class UserStore implements Store<User> {
 
     private final Store<User> userMemStore = new MemStore<>();
+
     @Override
     public void add(User model) {
         this.userMemStore.add(model);

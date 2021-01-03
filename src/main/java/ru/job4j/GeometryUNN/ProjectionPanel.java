@@ -159,9 +159,9 @@ public class ProjectionPanel extends JPanel{
      */
     public ProjectiveTransform createTransformOblique3D() {
         ProjectiveTransform pt = new ProjectiveTransform();
-        pt.m[0][2] = -Math.tan(phi);
-        pt.m[1][2] = (-Math.tan(theta)) / Math.cos(phi);
-        pt.m[2][2] = 0.0;
+        pt.getM()[0][2] = -Math.tan(phi);
+        pt.getM()[1][2] = (-Math.tan(theta)) / Math.cos(phi);
+        pt.getM()[2][2] = 0.0;
         pt.concatenate(worldToObject);
         return pt;
     }
@@ -177,10 +177,10 @@ public class ProjectionPanel extends JPanel{
      */
     public ProjectiveTransform createTransformCentral() {
         ProjectiveTransform pt = new ProjectiveTransform();
-        pt.m[0][2] = - Math.tan(phi);
-        pt.m[1][2] = (- Math.tan(theta)) / Math.cos(phi);
-        pt.m[2][2] = 0.0;
-        pt.m[3][2] = -1.0 / (distance * Math.cos(theta) * Math.cos(phi));
+        pt.getM()[0][2] = - Math.tan(phi);
+        pt.getM()[1][2] = (- Math.tan(theta)) / Math.cos(phi);
+        pt.getM()[2][2] = 0.0;
+        pt.getM()[3][2] = -1.0 / (distance * Math.cos(theta) * Math.cos(phi));
         pt.concatenate(worldToObject);
         return pt;
     }

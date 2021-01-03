@@ -1,20 +1,26 @@
 package ru.job4j.GeometryUNN;
 
 public class ProjectiveTransform {
-    public final int dim = 4;
-
+    private final int dim = 4;
     /**
      * Матрица отображения
      */
-    double m[][] = new double[dim][dim];
+    private double[][] m = new double[dim][dim];
 
     /**
      * Создает тождественное отображение
      */
+    public double[][] getM() {
+        return m;
+    }
+
+
     public ProjectiveTransform() {
         // В Java элементы числового массива инициализируются нулями,
         // поэтому достаточно изменить ненулевые элементы.
-        for (int i = 0; i < dim; i++) m[i][i] = 1;
+        for (int i = 0; i < dim; i++) {
+            m[i][i] = 1;
+        }
     }
 
     /**
@@ -22,9 +28,11 @@ public class ProjectiveTransform {
      * @param m матрица отображения
      */
     public ProjectiveTransform(double[][] m) {
-        for (int i = 0; i < dim; i++)
-            for (int j = 0; j < dim; j++)
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
                 this.m[i][j] = m[i][j];
+            }
+        }
     }
 
     /**
@@ -109,16 +117,19 @@ public class ProjectiveTransform {
      * @see java.awt.geom.AffineTransform#transform(java.awt.geom.Point2D, java.awt.geom.Point2D)
      */
     public Point3D transform(Point3D ptSrc, Point3D ptDst) {
-        if (ptDst == null) ptDst = new Point3D();
+        if (ptDst == null) {
+            ptDst = new Point3D();
+        }
         double[] ps = {ptSrc.x, ptSrc.y, ptSrc.z, 1};
         double[] pd = new double[dim];
-        for (int i = 0; i < dim; i++)
-            for (int j = 0; j < dim; j++)
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
                 pd[i] += m[i][j] * ps[j];
-        ptDst.x = pd[0] / pd[3];
-        ptDst.y = pd[1] / pd[3];
-        ptDst.z = pd[2] / pd[3];
-
+            }
+            ptDst.x = pd[0] / pd[3];
+            ptDst.y = pd[1] / pd[3];
+            ptDst.z = pd[2] / pd[3];
+        }
         return ptDst;
     }
 
@@ -140,8 +151,9 @@ public class ProjectiveTransform {
     // Для тестирования
     void printTransform() {
         for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++)
+            for (int j = 0; j < dim; j++) {
                 System.out.printf("%.2f ", m[i][j]);
+            }
             System.out.println();
         }
     }

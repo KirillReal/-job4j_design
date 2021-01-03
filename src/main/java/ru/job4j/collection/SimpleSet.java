@@ -3,7 +3,7 @@ package ru.job4j.collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class SimpleSet<T> implements Iterable{
+public class SimpleSet<T> implements Iterable {
     private int size;
     private final SimpleArray<T> array = new SimpleArray<>(size);
 

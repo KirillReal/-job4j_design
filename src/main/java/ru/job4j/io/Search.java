@@ -6,10 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-
 public class Search {
-    public static void main(String[] args) throws IOException{
-        if(args.length != 2) {
+    public static void main(String[] args) throws IOException {
+        if (args.length != 2) {
             throw new IOException();
         }
         Path start = Paths.get(args[0]);

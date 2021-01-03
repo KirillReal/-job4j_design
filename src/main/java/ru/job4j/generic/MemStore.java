@@ -3,17 +3,18 @@ package ru.job4j.generic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemStore <T extends Base> implements Store<T> {
+public class MemStore<T extends Base> implements Store<T> {
     private final List<T> list = new ArrayList<>();
 
-    private int indexOf(String id){
-        for(int i = 0; i < list.size();i++){
-            if(this.list.get(i).getId().equals(id)){
+    private int indexOf(String id) {
+        for (int i = 0; i < list.size(); i++) {
+            if (this.list.get(i).getId().equals(id)) {
                 return i;
             }
         }
         return -1;
     }
+
     @Override
     public void add(T model) {
         this.list.add(model);
@@ -22,8 +23,8 @@ public class MemStore <T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         int index = this.indexOf(id);
-        if(index != -1){
-            this.list.set(index,model);
+        if (index != -1) {
+            this.list.set(index, model);
             return true;
         }
         return false;
@@ -32,7 +33,7 @@ public class MemStore <T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         int index = this.indexOf(id);
-        if(index != -1){
+        if (index != -1) {
             this.list.remove(index);
             return true;
         }
@@ -43,7 +44,7 @@ public class MemStore <T extends Base> implements Store<T> {
     public T findById(String id) {
         T findId = null;
         int index = this.indexOf(id);
-        if(index != -1){
+        if (index != -1) {
             findId = this.list.get(index);
         }
         return findId;
