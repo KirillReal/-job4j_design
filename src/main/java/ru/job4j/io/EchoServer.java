@@ -19,11 +19,12 @@ public class EchoServer {
                     String str = in.readLine();
                     String[] arrStr = str.split("=");
                     str = arrStr[1];
+
                     if(str.contains("Hello")) {
                         out.write("Hello".getBytes());
                         out.write("HTTP/1.1 200 OK\r\n\r\n".concat(str).getBytes());
                     } else if (str.contains("Exit")) {
-                        server.close();
+                        break;
                     }else {
                         str = Stream.of(str.split(" "))
                                 .filter(s -> s.contains("msg"))
@@ -32,8 +33,10 @@ public class EchoServer {
                         System.out.println("msg: " + str);
                         out.write("HTTP/1.1 200 OK\r\n\r\n".concat(str).getBytes());
                     }
+
+                }
                 }
             }
         }
 }
-}
+
