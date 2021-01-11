@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 public class EchoServer {
     private static final Logger LOG =  LoggerFactory
             .getLogger(UsageLog4j.class.getName());
+
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (true) {
@@ -24,12 +25,12 @@ public class EchoServer {
                     String[] arrStr = str.split("=");
                     str = arrStr[1];
 
-                    if(str.contains("Hello")) {
+                    if (str.contains("Hello")) {
                         out.write("Hello".getBytes());
                         out.write("HTTP/1.1 200 OK\r\n\r\n".concat(str).getBytes());
                     } else if (str.contains("Exit")) {
                         break;
-                    }else {
+                    } else {
                         str = Stream.of(str.split(" "))
                                 .filter(s -> s.contains("msg"))
                                 .findFirst()
@@ -39,7 +40,7 @@ public class EchoServer {
                     }
                 }
                 }
-            }catch (IOException e) {
+            } catch (IOException e) {
             LOG.error("Exception in log");
         }
         }

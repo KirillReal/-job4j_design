@@ -16,11 +16,11 @@ public class SimpleSearch {
         return searcher.getPath();
     }
 
-    static class SearchFiles extends SimpleFileVisitor<Path> {
+    public static class SearchFiles extends SimpleFileVisitor<Path> {
         private final List<Path> pathsList = new ArrayList<>();
         private final String str;
 
-        SearchFiles(String exc) {
+        public SearchFiles(String exc) {
             this.str = exc;
         }
 

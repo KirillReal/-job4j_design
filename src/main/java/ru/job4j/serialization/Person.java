@@ -21,7 +21,6 @@ public class Person {
         this.statuses = statuses;
     }
 
-
     public boolean isSex() {
         return sex;
     }
@@ -39,8 +38,9 @@ public class Person {
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
     }
-    public static <fJSONObject> void main(String[] args) {
-        fJSONObject jsonContact = (fJSONObject) new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
+
+    public static void main(String[] args) {
+        JSONObject jsonContact =  new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
         /* JSONArray из ArrayList */
         List<String> list = new ArrayList<>();
         list.add("Student");
@@ -63,6 +63,7 @@ public class Person {
         /* Преобразуем объект person в json-строку */
         System.out.println(new JSONObject(person).toString());
     }
+
     public static class Contact {
         private final String phone;
 
