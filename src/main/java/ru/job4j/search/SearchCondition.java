@@ -26,10 +26,9 @@ public class SearchCondition {
             PrintWriter out = new PrintWriter(
                     new BufferedOutputStream(new
                             FileOutputStream(file))
-            )){
-                log.forEach(out :: println);
-            }
-        catch (Exception e) {
+            )) {
+            log.forEach(out :: println);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -47,14 +46,16 @@ public class SearchCondition {
                 String fileName = name.replace("*", "");
                 predicate = path -> path.getFileName().toString().contains(fileName);
                 break;
+            default:
+                System.out.println("Введён неправильный ключ");
+                break;
         }
         return predicate;
     }
 
-
     public static void main(String[] args) throws IOException {
         ArgsSearch argsSearch = new ArgsSearch(args);
-        if(!argsSearch.checkValid()) {
+        if (!argsSearch.checkValid()) {
             Predicate<Path> predicate = createPredicate(argsSearch.name(), argsSearch.type());
             Path start = Paths.get(argsSearch.directory());
             List<Path> files = search(start, predicate);

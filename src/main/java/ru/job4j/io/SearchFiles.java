@@ -39,7 +39,6 @@ public class SearchFiles implements FileVisitor<Path> {
         return CONTINUE;
     }
 
-
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
         return CONTINUE;

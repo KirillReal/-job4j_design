@@ -9,10 +9,11 @@ public class ArgsSearch {
         this.args = args;
     }
 
-    public boolean checkValid () {
+    public boolean checkValid() {
        File file = new File(directory());
        return file.isDirectory();
     }
+
     public String directory() {
         return args[1];
     }
