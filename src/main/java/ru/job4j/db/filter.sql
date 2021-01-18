@@ -43,7 +43,7 @@ select * from product as p inner join type as t on p.type_id = t.id where t.name
 --2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
 select * from product where name like '%Мороженое%';
 --3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
-select * from product where expired_date >= '2021-02-01' and expired_date < '2021-03-01';
+select * from product where expired_date >= current_date + interval '1 month' and expired_date < current_date + interval '2 month';
 --4. Написать запрос, который выводит самый дорогой продукт.
 select max(price) from product;
 select * from product where price = (select max(price) from product);
