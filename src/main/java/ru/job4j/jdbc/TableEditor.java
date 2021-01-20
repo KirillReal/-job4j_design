@@ -50,14 +50,12 @@ public class TableEditor implements AutoCloseable{
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-        String sql = "Alter table" + tableName + "Drop Column" + columnName + " ";
+        String sql = String.format("Alter table %s drop column: %s",tableName,columnName);
         execute(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
-        String sql = "Alter table" + tableName
-                + "Rename column" + columnName
-                + "to" + newColumnName;
+        String sql = String.format("Alter table %s rename column %s to %s" ,tableName,columnName,newColumnName);
         execute(sql);
     }
 
