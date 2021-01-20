@@ -24,23 +24,29 @@ public class TableEditor implements AutoCloseable{
     }
 
     public void createTable(String tableName) throws SQLException{
-        String sql = "Create table " + tableName + "()";
+        String sql = String.format("Create table %s",tableName);
         execute(sql);
     }
 
     public void dropTable(String tableName) throws SQLException {
-        String sql = "Drop table" + tableName;
+        String sql = String.format("Drop table %s",tableName);
         execute(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-        String sql = "Alter table" + tableName + "Add Column" + columnName + " " + type;
+        String sql = String.format("Alter table %s add column: %s",tableName,columnName);
         execute(sql);
     }
 
     private void execute(String sql) throws SQLException {
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
+            try (Statement statement = connection.createStatement()) {
+                 sql = String.format(
+                        "create table if not exists demo_table(%s, %s);",
+                        "id serial primary key",
+                        "name varchar(255)"
+                );
+                statement.execute(sql);
+            }
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
