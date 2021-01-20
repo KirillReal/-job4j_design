@@ -46,7 +46,7 @@ select * from product where name like '%Мороженое%';
 select *
 from product
 where expired_date >= date_trunc('month', current_date) + INTERVAL '1 month'
-  and expired_date < date_trunc('month', current_date) + INTERVAL '2 month';
+  and expired_date <= date_trunc('month', current_date) + INTERVAL '2 month';
 --4. Написать запрос, который выводит самый дорогой продукт.
 select max(price) from product;
 select * from product where price = (select max(price) from product);
