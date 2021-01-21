@@ -24,23 +24,23 @@ public class TableEditor implements AutoCloseable{
     }
 
     public void createTable(String tableName) throws SQLException{
-        String sql = String.format("Create table %s",tableName);
-        execute(sql);
+        System.out.printf("Create table %s",tableName);
+        execute();
     }
 
     public void dropTable(String tableName) throws SQLException {
-        String sql = String.format("Drop table %s",tableName);
-        execute(sql);
+        System.out.printf("Drop table %s",tableName);
+        execute();
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-        String sql = String.format("Alter table %s add column: %s",tableName,columnName);
-        execute(sql);
+        System.out.printf("Alter table %s add column: %s",tableName,columnName);
+        execute();
     }
 
-    private void execute(String sql) throws SQLException {
+    private void execute() throws SQLException {
             try (Statement statement = connection.createStatement()) {
-                 sql = String.format(
+                String sql = String.format(
                         "create table if not exists demo_table(%s, %s);",
                         "id serial primary key",
                         "name varchar(255)"
@@ -50,13 +50,13 @@ public class TableEditor implements AutoCloseable{
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-        String sql = String.format("Alter table %s drop column: %s",tableName,columnName);
-        execute(sql);
+        System.out.printf("Alter table %s drop column: %s",tableName,columnName);
+        execute();
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
-        String sql = String.format("Alter table %s rename column %s to %s" ,tableName,columnName,newColumnName);
-        execute(sql);
+        System.out.printf("Alter table %s rename column %s to %s" ,tableName,columnName,newColumnName);
+        execute();
     }
 
     public String getScheme(String tableName) throws SQLException {
