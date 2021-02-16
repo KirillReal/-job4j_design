@@ -6,9 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDemo {
-    public static void main(String[] args) throws ClassNotFoundException,SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
-        ConnectionRead connectionRead = new ConnectionRead("./sec/main/java/ru.job4j/resources/app.properties");
+        ConnectionRead connectionRead
+                = new ConnectionRead("./src/main/java/ru.job4j/resources/app.properties");
         connectionRead.load();
         String url = connectionRead.get(ConnectionRead.url);
         String login = connectionRead.get(ConnectionRead.login);

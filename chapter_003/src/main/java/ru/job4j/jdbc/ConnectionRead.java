@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConnectionRead {
-    private static final Logger Log = LoggerFactory.getLogger(ConnectionRead.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(ConnectionRead.class.getName());
     private final String path;
-    private final Map<String,String> values;
+    private final Map<String, String> values;
 
     public static final String url = "url";
     public static final String login = "login";
@@ -31,7 +31,7 @@ public class ConnectionRead {
                         }
                     });
         }catch (IOException e){
-            Log.error("Ощибка четния файла конфигурации",e);
+            LOG.error("Ощибка четния файла конфигурации",e);
         }
     }
 
