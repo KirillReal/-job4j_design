@@ -3,6 +3,9 @@ package ru.job4j.ood.srp;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import org.junit.Test;
+import ru.job4j.ood.srp.report.ReportJSON;
+import ru.job4j.ood.srp.report.ReportXML;
+
 import java.util.Calendar;
 
 public class ReportEngineTest {
@@ -81,5 +84,34 @@ public class ReportEngineTest {
                 + worker.getSalary() + ";"
                 + "</p></body></html>";
         assertThat(engine.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void whenJsonGenerated() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employer worker = new Employer("Ivan", now, now, 100);
+        store.add(worker);
+        Report json = new ReportJSON(store);
+        String expect = "{\"0\": {"
+                + "\"Name\": \"" + worker.getName() + "\","
+                + "\"Salary\": " + worker.getSalary() + "}}";
+        assertThat(json.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void whenXmlGenerated() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employer worker = new Employer("Ivan", now, now, 100);
+        store.add(worker);
+        Report xml = new ReportXML(store);
+        String expect = "<Employees>"
+                + "<Employee>"
+                + "<Name>" + worker.getName() + "</Name>"
+                + "<Salary>" + worker.getSalary() + "</Salary>"
+                + "</Employee>"
+                + "</Employees>";
+        assertThat(xml.generate(em -> true), is(expect));
     }
 }
