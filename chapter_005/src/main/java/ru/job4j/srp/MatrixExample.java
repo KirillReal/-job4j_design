@@ -1,4 +1,4 @@
-package ru.job4j.template.srp;
+package ru.job4j.srp;
 
 public interface MatrixExample {
     String Matrix(int size);

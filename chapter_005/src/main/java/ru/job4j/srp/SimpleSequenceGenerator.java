@@ -1,4 +1,4 @@
-package ru.job4j.template.srp;
+package ru.job4j.srp;
 
 import java.util.List;
 import java.util.stream.Collectors;
