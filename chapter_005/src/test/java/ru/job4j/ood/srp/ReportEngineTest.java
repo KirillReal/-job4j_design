@@ -2,6 +2,9 @@ package ru.job4j.ood.srp;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Test;
 import ru.job4j.ood.srp.report.ReportJSON;
 import ru.job4j.ood.srp.report.ReportXML;
@@ -87,17 +90,20 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenJsonGenerated() {
+    public void whenGeneratedJSON() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employer worker = new Employer("Ivan", now, now, 100);
         store.add(worker);
-        Report json = new ReportJSON(store);
-        String expect = "{\"0\": {"
-                + "\"Name\": \"" + worker.getName() + "\","
-                + "\"Salary\": " + worker.getSalary() + "}}";
-        assertThat(json.generate(em -> true), is(expect));
+        Report engine = new ReportJSON(store);
+        final Gson gson = new GsonBuilder().create();
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator())
+                .append(gson.toJson(worker));
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
+
 
     @Test
     public void whenXmlGenerated() {
