@@ -12,15 +12,12 @@ public class ControlQuality {
     }
 
     public void executeStrategy(Food food) {
-        for(Strategy strategy : strategyList) {
-            if(strategy.check(food)) {
-                strategy.add(food);
+            for(Strategy strategy : strategyList) {
+                if(strategy.check(food)){
+                    strategy.add(food);
+                }
             }
         }
-        throw new IllegalStateException("Нет подходящего хранилища");
-    }
-
-    public List<Strategy> getStrategyList() {
-        return strategyList;
-    }
 }
+
+
