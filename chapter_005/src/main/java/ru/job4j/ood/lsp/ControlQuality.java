@@ -1,23 +1,26 @@
 package ru.job4j.ood.lsp;
 
-public class ControlQuality {
-    private final WareHouse warehouse;
-    private final Trash trash;
-    private final Shop shop;
+import java.util.List;
 
-    public  ControlQuality(WareHouse warehouse, Trash trash, Shop shop) {
-        this.warehouse = warehouse;
-        this.trash = trash;
-        this.shop = shop;
+public class ControlQuality {
+
+     private final List<Strategy> strategyList;
+
+
+    public  ControlQuality(List<Strategy> strategyList) {
+        this.strategyList = strategyList;
     }
 
     public void executeStrategy(Food food) {
-        if (trash.check(food)) {
-            trash.add(food);
-        } else if (shop.check(food)) {
-            shop.add(food);
-        } else if (warehouse.check(food)) {
-            warehouse.add(food);
+        for(Strategy strategy : strategyList) {
+            if(strategy.check(food)) {
+                strategy.add(food);
+            }
         }
+        throw new IllegalStateException("Нет подходящего хранилища");
+    }
+
+    public List<Strategy> getStrategyList() {
+        return strategyList;
     }
 }
