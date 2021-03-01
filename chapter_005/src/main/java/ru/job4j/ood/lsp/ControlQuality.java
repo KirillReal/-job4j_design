@@ -15,6 +15,7 @@ public class ControlQuality {
             for(Strategy strategy : strategyList) {
                 if(strategy.check(food)){
                     strategy.add(food);
+                    break;
                 }
             }
         }

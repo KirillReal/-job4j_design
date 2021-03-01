@@ -14,8 +14,8 @@ public class ControlQualityTest {
     public void executeStrategyTrash() {
         Calendar dateCreated = Calendar.getInstance();
         Calendar dateExpired = Calendar.getInstance();
-        dateCreated.set(2021, Calendar.FEBRUARY, 5);
-        dateExpired.set(2021, Calendar.FEBRUARY, 6);
+        dateCreated.set(2021, Calendar.FEBRUARY, 27);
+        dateExpired.set(2021, Calendar.FEBRUARY, 8);
         Food milk = new Milk("milk", dateCreated, dateExpired, 1000, 0);
         WareHouse warehouse = new WareHouse();
         Shop shop = new Shop();
@@ -44,8 +44,8 @@ public class ControlQualityTest {
     public void executeStrategyShopNoDiscount() {
         Calendar dateCreated = Calendar.getInstance();
         Calendar dateExpired = Calendar.getInstance();
-        dateCreated.set(2021, Calendar.FEBRUARY, 10);
-        dateExpired.set(2021, Calendar.FEBRUARY, 20);
+        dateCreated.set(2021, Calendar.JANUARY, 28);
+        dateExpired.set(2021, Calendar.MARCH, 5);
         Food bread = new Bread("bread", dateCreated, dateExpired, 100, 0);
         WareHouse warehouse = new WareHouse();
         Shop shop = new Shop();
@@ -59,13 +59,13 @@ public class ControlQualityTest {
     public void executeStrategyShopDiscount() {
         Calendar dateCreated = Calendar.getInstance();
         Calendar dateExpired = Calendar.getInstance();
-        dateCreated.set(2021, Calendar.FEBRUARY, 5);
-        dateExpired.set(2021, Calendar.FEBRUARY,6);
-        Food bread = new Bread("bread", dateCreated, dateExpired, 75, 0);
+        dateCreated.set(2021, Calendar.FEBRUARY, 20);
+        dateExpired.set(2021, Calendar.MARCH,8);
+        Food bread = new Bread("bread", dateCreated, dateExpired, 100, 0);
         WareHouse warehouse = new WareHouse();
         Shop shop = new Shop();
         Trash trash = new Trash();
-        ControlQuality control = new ControlQuality(List.of(shop, trash, warehouse));
+        ControlQuality control = new ControlQuality(List.of(warehouse, trash, shop));
         control.executeStrategy(bread);
         assertThat(75, is(shop.getFoodList().get(0).getPrice()));
     }

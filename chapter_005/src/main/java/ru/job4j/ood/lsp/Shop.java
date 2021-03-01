@@ -14,13 +14,13 @@ public class Shop implements Strategy{
     @Override
     public boolean check(Food food) {
         double result = percentOfDate(food);
-        if(result <= 25 && result < 1)
-        if(result > 0.75){
-            MakeDiscount mDiscount = new MakeDiscount();
-            mDiscount.makeDiscount(food);
+        if(result >= 25 && result < 1) {
+            if (result > 0.75) {
+                MakeDiscount mDiscount = new MakeDiscount();
+                mDiscount.makeDiscount(food);
+            }
             return true;
         }
-
         return false;
     }
 
