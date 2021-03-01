@@ -1,5 +1,6 @@
 package ru.job4j.ood.lsp.parking;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -41,10 +42,10 @@ public class ParkingTest {
 
     @Test
     public void whenTrackParkingThenTrueInCarParking () {
-        TruckCar truck = new TruckCar("VOLVO 1",5);
-        TruckCar truckTwo = new TruckCar("VOLVO 2",5);
+        TruckCar truck = new TruckCar("VOLVO 1",6);
+        TruckCar truckTwo = new TruckCar("VOLVO 2",6);
         PassengerCar car = new PassengerCar("Nissan 1");
-        Parking park = new Parking(1,10);
+        Parking park = new Parking(1,12);
         park.parkingCar(car);
         park.parkingCar(truck);
         assertThat(park.parkingCar(truckTwo), is(true));
