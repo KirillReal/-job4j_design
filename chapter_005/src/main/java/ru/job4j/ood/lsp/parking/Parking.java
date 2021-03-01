@@ -54,12 +54,5 @@ public class Parking implements StrategyParking {
             }
         }
 
-    public List<AbstractCar> getParkTruck() {
-        return this.parkTruck;
-    }
-
-    public List<AbstractCar> getParkCar() {
-        return this.parkCar;
-    }
-    }
+}
 
