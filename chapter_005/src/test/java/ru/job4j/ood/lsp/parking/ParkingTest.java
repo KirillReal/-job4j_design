@@ -9,14 +9,14 @@ public class ParkingTest {
 
     @Test
     public void whenCarParkingThenTrue () {
-        PassengerCar car = new PassengerCar("Nissan 1");
+        PassengerCar car = new PassengerCar("Lada 1");
         Parking park = new Parking(10,10);
         assertThat(park.parkingCar(car), is(true));
     }
 
     @Test
     public void whenCarParkingThenFalse () {
-        PassengerCar car = new PassengerCar("Nissan 1");
+        PassengerCar car = new PassengerCar("Kia 1");
         PassengerCar carAnother = new PassengerCar("Nissan 2");
         Parking park = new Parking(10,1);
         park.parkingCar(carAnother);
@@ -25,15 +25,15 @@ public class ParkingTest {
 
     @Test
     public void whenTruckParkingThenTrue () {
-        TruckCar truck = new TruckCar("KAMAZ 1", 5);
+        TruckCar truck = new TruckCar("VOLVO 1", 5);
         Parking park = new Parking(10,1);
         assertThat(park.parkingCar(truck), is(true));
     }
 
     @Test
     public void whenTrackParkingThenFalse () {
-        TruckCar truck = new TruckCar("KAMAZ 1", 5);
-        PassengerCar car = new PassengerCar("Nissan 1");
+        TruckCar truck = new TruckCar("VOLVO 1", 5);
+        PassengerCar car = new PassengerCar("BMW 1");
         Parking park = new Parking(0,1);
         park.parkingCar(car);
         assertThat(park.parkingCar(truck), is(false));
@@ -41,9 +41,8 @@ public class ParkingTest {
 
     @Test
     public void whenTrackParkingThenTrueInCarParking () {
-        // парковка грузовика в парковку с легковыми
-        TruckCar truck = new TruckCar("KAMAZ 1",5);
-        TruckCar truckTwo = new TruckCar("KAMAZ 2",5);
+        TruckCar truck = new TruckCar("VOLVO 1",5);
+        TruckCar truckTwo = new TruckCar("VOLVO 2",5);
         PassengerCar car = new PassengerCar("Nissan 1");
         Parking park = new Parking(1,10);
         park.parkingCar(car);
@@ -70,7 +69,7 @@ public class ParkingTest {
 
     @Test
     public void whenTruckRemoveFromParkTruck () {
-        TruckCar truck = new TruckCar("KAMAZ 1", 5);
+        TruckCar truck = new TruckCar("VOLVO 1", 5);
         Parking park = new Parking(1,1);
         park.parkingCar(truck);
         park.remove(truck);
@@ -79,7 +78,7 @@ public class ParkingTest {
 
     @Test
     public void whenTruckRemoveFromParkCar () {
-        TruckCar truck = new TruckCar("KAMAZ 1", 5);
+        TruckCar truck = new TruckCar("VOLVO 1", 5);
         Parking park = new Parking(0,5);
         park.parkingCar(truck);
         park.remove(truck);
@@ -88,8 +87,8 @@ public class ParkingTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void whenTruckRemoveThenThrow () {
-        TruckCar truck = new TruckCar("KAMAZ 1", 5);
-        TruckCar truckTwo = new TruckCar("KAMAZ 2", 5);
+        TruckCar truck = new TruckCar("VOLVO 1", 5);
+        TruckCar truckTwo = new TruckCar("VOLVO 2", 5);
         Parking park = new Parking(0,5);
         park.parkingCar(truck);
         park.remove(truckTwo);
