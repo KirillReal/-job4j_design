@@ -26,13 +26,15 @@ public class Parking implements StrategyParking {
                 this.parkTruck.add(car);
                 return true;
             } else if (this.cellsCar - this.parkCar.size() >= car.getParkingSize()) {
-                parkCar.add(car);
+                for(int i = 0;i < car.getParkingSize(); i++){
+                        parkCar.add(car);
+                }
                 return true;
             } else {
                 return false;
             }
         } else if (this.parkCar.size() != this.cellsCar) {
-            parkCar.add(car);
+             parkCar.add(car);
             return true;
         }
         return false;
