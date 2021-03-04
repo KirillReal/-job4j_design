@@ -24,6 +24,13 @@ public class Shop implements Strategy{
         return false;
     }
 
+    @Override
+    public List<Food> clear() {
+        List<Food> foodReturn = new ArrayList<>(foodList);
+        foodList.clear();
+        return foodReturn;
+    }
+
     public List<Food> getFoodList() {
         return foodList;
     }

@@ -1,11 +1,11 @@
 package ru.job4j.ood.lsp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
 
      private final List<Strategy> strategyList;
-
 
     public  ControlQuality(List<Strategy> strategyList) {
         this.strategyList = strategyList;
@@ -19,6 +19,22 @@ public class ControlQuality {
                 }
             }
         }
+
+    public void sort(Food item) {
+        for (Strategy strategy : strategyList) {
+            if (strategy.check(item)) {
+                strategy.add(item);
+            }
+        }
+    }
+
+    public void resort() {
+        List<Food> containerFood = new ArrayList<>();
+        for (Strategy strategy: strategyList) {
+            containerFood.addAll(strategy.clear());
+        }
+        containerFood.forEach(this::sort);
+    }
 }
 
 

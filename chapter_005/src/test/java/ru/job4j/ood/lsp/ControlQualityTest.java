@@ -3,6 +3,7 @@ package ru.job4j.ood.lsp;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -42,10 +43,10 @@ public class ControlQualityTest {
 
     @Test
     public void executeStrategyShopNoDiscount() {
-        Calendar dateCreated = Calendar.getInstance();
-        Calendar dateExpired = Calendar.getInstance();
-        dateCreated.set(2021, Calendar.JANUARY, 28);
-        dateExpired.set(2021, Calendar.MARCH, 5);
+        Calendar dateCreated = new GregorianCalendar();
+        Calendar dateExpired = new GregorianCalendar();
+        dateCreated.add(Calendar.HOUR,1);
+        dateExpired.add( Calendar.DAY_OF_MONTH, -1);
         Food bread = new Bread("bread", dateCreated, dateExpired, 100, 0);
         WareHouse warehouse = new WareHouse();
         Shop shop = new Shop();
@@ -55,10 +56,11 @@ public class ControlQualityTest {
         assertThat(bread.getName(), is(shop.getFoodList().get(0).getName()));
     }
 
+
     @Test
     public void executeStrategyShopDiscount() {
-        Calendar dateCreated = Calendar.getInstance();
-        Calendar dateExpired = Calendar.getInstance();
+        Calendar dateCreated = new GregorianCalendar();
+        Calendar dateExpired = new GregorianCalendar();
         dateCreated.set(2021, Calendar.FEBRUARY, 20);
         dateExpired.set(2021, Calendar.MARCH,8);
         Food bread = new Bread("bread", dateCreated, dateExpired, 100, 0);
@@ -70,4 +72,23 @@ public class ControlQualityTest {
         assertThat(75, is(shop.getFoodList().get(0).getPrice()));
     }
 
+    @Test
+    public void resort() {
+        Calendar dateCreated = Calendar.getInstance();
+        Calendar dateExpired = Calendar.getInstance();
+        dateCreated.set(2021, Calendar.FEBRUARY, 6);
+        dateExpired.set(2021, Calendar.MARCH, 5);
+        Food milk = new Milk("milk", dateCreated, dateExpired, 1000, 0);
+        WareHouse warehouse = new WareHouse();
+        Shop shop = new Shop();
+        Trash trash = new Trash();
+        ControlQuality control = new ControlQuality(List.of(shop, trash, warehouse));
+        control.sort(milk);
+        assertThat(milk.getName(), is(shop.getFoodList().get(0).getName()));
+        dateCreated.set(2021, Calendar.MARCH, 5);
+        milk.setCreateDate(dateCreated);
+        control.resort();
+        assertThat(milk.getName(), is(warehouse.getFoodList().get(0).getName()));
+
+    }
 }

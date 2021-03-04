@@ -15,6 +15,13 @@ public class Trash implements Strategy{
         return percentOfDate(food) >= 1;
     }
 
+    @Override
+    public List<Food> clear() {
+        List<Food> foodReturn = new ArrayList<>(foodList);
+        foodList.clear();
+        return foodReturn;
+    }
+
     public List<Food> getFoodList() {
         return foodList;
     }
