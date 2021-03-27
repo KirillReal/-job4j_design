@@ -24,6 +24,7 @@ public class ControlQuality {
         for (Strategy strategy : strategyList) {
             if (strategy.check(item)) {
                 strategy.add(item);
+                break;
             }
         }
     }

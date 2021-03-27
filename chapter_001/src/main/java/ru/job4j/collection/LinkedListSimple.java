@@ -6,36 +6,23 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class LinkedListSimple<E> implements Iterable<E> {
-    private transient int size = 0;
+   private transient int size = 0;
+    private transient int modCount = 0;
     private transient Node<E> first;
     private transient Node<E> last;
-    private int modCount = 0;
 
-    private static class Node<E> {
-        private E item;
-        private Node<E> next;
-        private Node<E> prev;
-
-        Node(Node<E> prev, E element, Node<E> next) {
-            this.item = element;
-            this.next = next;
-            this.prev = prev;
-        }
+    public int getSize() {
+        return size;
     }
 
-    public LinkedListSimple() {
-        this.first = new Node<>(null, null, null);
-    }
-
-    public void addLast(E e) {
-        final Node<E> l = last;
-        final Node<E> newEl = new Node<>(l, e, null);
+    public void add(E value) {
+        Node<E> l = last;
+        Node<E> newNode = new Node<>(l, value, null);
+        last = newNode;
         if (l == null) {
-            first = newEl;
-            last = newEl;
+            first = newNode;
         } else {
-            l.next = newEl;
-            last = newEl;
+            l.next = newNode;
         }
         size++;
         modCount++;
@@ -43,43 +30,82 @@ public class LinkedListSimple<E> implements Iterable<E> {
 
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> getEl = first;
-        for (int i = 0; i < index; i++) {
-            getEl = getEl.next;
+        if (index == 0) {
+            return first.item;
+        } else if (index + 1 == size) {
+            return last.item;
         }
-        return getEl.item;
+        Node<E> rsl;
+        if (index < size / 2) {
+            rsl = last;
+            for (int i = size - 1; i > index; i--) {
+                rsl = rsl.prev;
+            }
+        } else {
+            rsl = first;
+            for (int i = 0; i < index; i++) {
+                rsl = rsl.next;
+            }
+        }
+        return rsl.item;
     }
 
-        @Override
-        public Iterator<E> iterator() {
-            return new Iterator<E>() {
-                private Node<E> result = first;
-                private final int expectedModCount = modCount;
-                @Override
-                public boolean hasNext() {
-                    if (expectedModCount != modCount) {
-                        throw new ConcurrentModificationException();
-                    }
-                    return result != null;
-                }
-
-                @Override
-                public E next() {
-                    if (!hasNext()) {
-                        throw new NoSuchElementException();
-                    }
-                     E value = result.item;
-                     result = result.next;
-                     return value;
-                }
-            };
+    public E deleteLast() {
+        E rsl;
+        switch (size) {
+            case 0:
+                throw new NoSuchElementException();
+            case 1:
+                rsl = last.item;
+                first = null;
+                last = null;
+                break;
+            default:
+                rsl = last.item;
+                last = last.prev;
+                last.next = null;
         }
+        size--;
+        modCount++;
+        return rsl;
+    }
 
-    public static void main(String[] args) {
-        LinkedListSimple<String> data = new LinkedListSimple<>();
-        data.addLast("A");
-        Iterator<String> it = data.iterator();
-        System.out.println(data.get(0));
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private final int expectedModCount = modCount;
+            private Node<E> cursor = first;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return cursor != null;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                E rsl = cursor.item;
+                cursor = cursor.next;
+                return rsl;
+            }
+        };
+    }
+
+    private static class Node<E> {
+       private E item;
+        private  Node<E> next;
+        private Node<E> prev;
+
+        Node(Node<E> prev, E element, Node<E> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
     }
     }
 

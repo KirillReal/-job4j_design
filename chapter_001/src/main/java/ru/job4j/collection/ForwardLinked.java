@@ -7,14 +7,9 @@ import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
-    private int size = 0;
-
-    public boolean isEmpty() {
-        return head == null;
-    }
 
     public void add(T value) {
-        Node<T> node = new Node<T>(value, null);
+        Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
             return;
@@ -26,27 +21,37 @@ public class ForwardLinked<T> implements Iterable<T> {
         tail.next = node;
     }
 
-    public void addFirst(T value) {
-        Node<T> prev = head;
-        head = new Node<>(value, null);
-        head.next = prev;
+    public void revert() {
+        if (head == null || head.next == null) {
+            return;
+        }
+        Node<T> first = head;
+        Node<T> next = head.next;
+        Node<T> prev;
+        do {
+            prev = head;
+            head = next;
+            next = next.next;
+            head.next = prev;
+        } while (next != null);
+        first.next = null;
     }
 
     public T deleteFirst() {
         if (head == null) {
             throw new NoSuchElementException();
         }
-        Node<T> node = head;
-        head = head.next;
-        //node.next = null;
-        size--;
-        return node.value;
+        Node<T> next = head.next;
+        head.next = null;
+        T oldFirst = head.value;
+        head = next;
+        return oldFirst;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-           private Node<T> node = head;
+        return new Iterator<>() {
+            private Node<T> node = head;
 
             @Override
             public boolean hasNext() {

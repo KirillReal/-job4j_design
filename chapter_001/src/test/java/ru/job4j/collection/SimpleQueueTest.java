@@ -11,7 +11,7 @@ public class SimpleQueueTest {
 
     @Test
     public void whenPushPoll() {
-        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        SimpleQueue<Integer> queue = new SimpleQueue<Integer>();
         queue.push(1);
         int rsl = queue.poll();
         assertThat(rsl, is(1));
@@ -19,7 +19,7 @@ public class SimpleQueueTest {
 
     @Test
     public void when2PushPoll() {
-        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        SimpleQueue<Integer> queue = new SimpleQueue<Integer>();
         queue.push(1);
         queue.push(2);
         int rsl = queue.poll();
@@ -28,7 +28,7 @@ public class SimpleQueueTest {
 
     @Test
     public void when2PushPollPushPoll() {
-        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        SimpleQueue<Integer> queue = new SimpleQueue<Integer>();
         queue.push(1);
         queue.poll();
         queue.push(2);
@@ -38,12 +38,12 @@ public class SimpleQueueTest {
 
     @Test(expected = NoSuchElementException.class)
     public void whenEmptyPoll() {
-        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        SimpleQueue<Integer> queue = new SimpleQueue<Integer>();
         queue.poll();
     }
 
     public void whenPushPushPollAndPush() {
-        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        SimpleQueue<Integer> queue = new SimpleQueue<Integer>();
         queue.push(1);
         queue.push(2);
         queue.poll();
