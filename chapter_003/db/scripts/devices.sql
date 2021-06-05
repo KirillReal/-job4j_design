@@ -1,4 +1,4 @@
-create database aggregate_functions;
+
 
 create table devices(
                         id serial primary key,

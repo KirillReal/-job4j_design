@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 public class ReportXML implements Report {
     private Store store;
 
-    public ReportXML (Store store) {
+    public ReportXML(Store store) {
         this.store = store;
     }
 
@@ -17,7 +17,7 @@ public class ReportXML implements Report {
     public String generate(Predicate<Employer> filter) {
         StringBuilder text = new StringBuilder();
         text.append("<Employees>");
-        for (Employer employee : store.findBy(filter) ) {
+        for (Employer employee : store.findBy(filter)) {
             text
                     .append("<Employee>")
                     .append("<Name>")

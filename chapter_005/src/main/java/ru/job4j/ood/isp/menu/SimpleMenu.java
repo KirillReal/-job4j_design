@@ -5,7 +5,7 @@ import java.util.*;
 
 public class SimpleMenu implements Menu {
 
-    List<Node> roots;
+    private List<Node> roots;
 
     public boolean addRoot(String rootName, AbstractAction action) {
         boolean rsl = false;
@@ -16,7 +16,6 @@ public class SimpleMenu implements Menu {
         }
         return rsl;
     }
-
 
     private Optional<Node> findNode(String name) {
         Optional<Node> found = Optional.empty();
@@ -33,7 +32,8 @@ public class SimpleMenu implements Menu {
     }
 
     private boolean changeNode(
-            String elementName, AbstractAction action, BiFunction<Node, AbstractAction, Boolean> function
+            String elementName, AbstractAction action, BiFunction<Node,
+            AbstractAction, Boolean> function
     ) {
         Optional<Node> optionalNode = findNode(elementName);
         boolean rsl = false;
@@ -51,7 +51,7 @@ public class SimpleMenu implements Menu {
         }
         Optional<Node> elementNode = findNode(element);
         if (elementNode.isEmpty()) {
-            parentNode.get().children.add(new Node(element,action,parentNode.get()));
+            parentNode.get().children.add(new Node(element, action, parentNode.get()));
             return true;
         }
         return false;
@@ -94,6 +94,7 @@ public class SimpleMenu implements Menu {
     public String ordered() {
         return ordered(roots, "", new StringBuilder()).toString();
     }
+
     private StringBuilder ordered(List<Node> nodes, String prefix, StringBuilder out) {
         String curPrefix;
         for (int i = 0; i < nodes.size(); i++) {
@@ -106,7 +107,6 @@ public class SimpleMenu implements Menu {
         }
         return out;
     }
-
 
     @Override
     public String unOrdered() {

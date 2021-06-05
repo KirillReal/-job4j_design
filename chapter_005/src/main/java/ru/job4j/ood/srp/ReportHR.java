@@ -2,10 +2,10 @@ package ru.job4j.ood.srp;
 
 import java.util.function.Predicate;
 
-public class ReportHR implements Report{
+public class ReportHR implements Report {
     private final Store store;
 
-    public ReportHR (Store store) {
+    public ReportHR(Store store) {
         this.store = store;
     }
 

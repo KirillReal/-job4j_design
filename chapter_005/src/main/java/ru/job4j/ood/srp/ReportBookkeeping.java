@@ -2,12 +2,13 @@ package ru.job4j.ood.srp;
 
 import java.util.function.Predicate;
 
-public class ReportBookkeeping implements Report{
+public class ReportBookkeeping implements Report {
     private final Store store;
 
-    public ReportBookkeeping (Store store) {
+    public ReportBookkeeping(Store store) {
         this.store = store;
     }
+
     @Override
     public String generate(Predicate<Employer> filter) {
         StringBuilder text = new StringBuilder();

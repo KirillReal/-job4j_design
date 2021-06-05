@@ -1,4 +1,4 @@
-create database garage;
+
 
 create table body (
                       id serial primary key,

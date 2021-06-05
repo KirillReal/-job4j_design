@@ -20,13 +20,13 @@ public class ReportEngineTest {
         Employer worker = new Employer("Ivan", now, now, 100);
         store.add(worker);
         ReportEngine engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -41,17 +41,17 @@ public class ReportEngineTest {
         store.add(worker2);
         store.add(worker3);
         Report engine = new ReportHR(store);
-        String expect = "Name; Salary;" +
-                System.lineSeparator() +
-                worker1.getName() + ";" +
-                worker1.getSalary() + ";" +
-                System.lineSeparator() +
-                worker2.getName() + ";" +
-                worker2.getSalary() + ";" +
-                System.lineSeparator() +
-                worker3.getName() + ";" +
-                worker3.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Salary;"
+                + System.lineSeparator()
+                + worker1.getName() + ";"
+                + worker1.getSalary() + ";"
+                + System.lineSeparator()
+                + worker2.getName() + ";"
+                + worker2.getSalary() + ";"
+                + System.lineSeparator()
+                + worker3.getName() + ";"
+                + worker3.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -103,7 +103,6 @@ public class ReportEngineTest {
                 .append(gson.toJson(worker));
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
-
 
     @Test
     public void whenXmlGenerated() {

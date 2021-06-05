@@ -26,7 +26,7 @@ public class Parking implements StrategyParking {
                 this.parkTruck.add(car);
                 return true;
             } else if (this.cellsCar - this.parkCar.size() >= car.getParkingSize()) {
-                for(int i = 0;i < car.getParkingSize(); i++){
+                for (int i = 0; i < car.getParkingSize(); i++) {
                         parkCar.add(car);
                 }
                 return true;
@@ -41,17 +41,17 @@ public class Parking implements StrategyParking {
     }
 
         @Override
-        public void remove (AbstractCar car){
+        public void remove(AbstractCar car) {
             int size = car.getParkingSize();
-            if(this.parkCar.contains(car)) {
+            if (this.parkCar.contains(car)) {
                 if (size == 1) {
                     this.parkCar.remove(car);
-                }else {
+                } else {
                     this.parkCar.removeIf(p -> p.equals(car));
                 }
-            }else if (this.parkTruck.contains(car)){
+            } else if (this.parkTruck.contains(car)) {
                 this.parkTruck.remove(car);
-            }else {
+            } else {
                 throw new IllegalStateException("Нет машины с таким именем");
             }
         }

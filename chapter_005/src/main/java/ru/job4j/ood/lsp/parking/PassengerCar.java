@@ -12,6 +12,7 @@ public class PassengerCar implements AbstractCar {
     public String getName() {
         return name;
     }
+
     @Override
     public int getParkingSize() {
         return size;

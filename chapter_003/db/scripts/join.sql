@@ -1,4 +1,4 @@
-create database joinExample;
+
 
 create table faculties (
                            id serial primary key,

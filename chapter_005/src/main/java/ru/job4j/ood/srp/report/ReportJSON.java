@@ -12,9 +12,10 @@ public class ReportJSON implements Report {
 
     private final Store store;
 
-   public ReportJSON (Store store) {
+   public ReportJSON(Store store) {
         this.store = store;
     }
+
     @Override
     public String generate(Predicate<Employer> filter) {
         StringBuilder text = new StringBuilder();

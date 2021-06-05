@@ -1,5 +1,4 @@
 select version();
-create database cars;
 create table cars(
                      id serial primary key,
                      name varchar(255),

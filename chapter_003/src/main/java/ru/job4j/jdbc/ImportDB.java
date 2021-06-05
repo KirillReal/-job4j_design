@@ -24,7 +24,7 @@ public class ImportDB {
             rd.lines().forEach(
                     s -> {
                         String[] lines = s.split(";");
-                        if(lines.length != 2) {
+                        if (lines.length != 2) {
                             users.add(new User(
                                     lines[0],
                                     lines[1]
@@ -54,15 +54,14 @@ public class ImportDB {
     }
 
     private static class User {
-        String name;
-        String email;
+       private String name;
+       private String email;
 
         public User(String name, String email) {
             this.name = name;
             this.email = email;
         }
     }
-
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();

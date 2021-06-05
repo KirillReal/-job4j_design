@@ -10,23 +10,23 @@ public class Food {
     private int price;
     private double discount;
 
-    @Override
-    public String toString() {
-        return "Food{" +
-                "name='" + name + '\'' +
-                ", expiryDate=" + expiryDate +
-                ", createDate=" + createDate +
-                ", price=" + price +
-                ", discount=" + discount +
-                '}';
-    }
-
-    public Food(String name,Calendar expiryDate,Calendar createDate, int price, double discount) {
+    public Food(String name, Calendar expiryDate, Calendar createDate, int price, double discount) {
         this.name = name;
         this.expiryDate = expiryDate;
         this.createDate = createDate;
         this.price = price;
         this.discount = discount;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{"
+                + "name='" + name + '\''
+                + ", expiryDate=" + expiryDate
+                + ", createDate=" + createDate
+                + ", price=" + price
+                + ", discount=" + discount
+                + '}';
     }
 
     public String getName() {

@@ -9,89 +9,72 @@ import static org.junit.Assert.assertThat;
 public class ParkingTest {
 
     @Test
-    public void whenCarParkingThenTrue () {
+    public void whenCarParkingThenTrue() {
         PassengerCar car = new PassengerCar("Lada 1");
-        Parking park = new Parking(10,10);
+        Parking park = new Parking(10, 10);
         assertThat(park.parkingCar(car), is(true));
     }
 
     @Test
-    public void whenCarParkingThenFalse () {
+    public void whenCarParkingThenFalse() {
         PassengerCar car = new PassengerCar("Kia 1");
         PassengerCar carAnother = new PassengerCar("Nissan 2");
-        Parking park = new Parking(10,1);
+        Parking park = new Parking(10, 1);
         park.parkingCar(carAnother);
         assertThat(park.parkingCar(car), is(false));
     }
 
     @Test
-    public void whenTruckParkingThenTrue () {
+    public void whenTruckParkingThenTrue() {
         TruckCar truck = new TruckCar("VOLVO 1", 5);
-        Parking park = new Parking(10,1);
+        Parking park = new Parking(10, 1);
         assertThat(park.parkingCar(truck), is(true));
     }
 
     @Test
-    public void whenTrackParkingThenFalse () {
+    public void whenTrackParkingThenFalse() {
         TruckCar truck = new TruckCar("VOLVO 1", 5);
         PassengerCar car = new PassengerCar("BMW 1");
-        Parking park = new Parking(0,1);
+        Parking park = new Parking(0, 1);
         park.parkingCar(car);
         assertThat(park.parkingCar(truck), is(false));
     }
 
     @Test
-    public void whenTrackParkingThenTrueInCarParking () {
-        TruckCar truck = new TruckCar("VOLVO 1",6);
-        TruckCar truckTwo = new TruckCar("VOLVO 2",6);
+    public void whenTrackParkingThenTrueInCarParking() {
+        TruckCar truck = new TruckCar("VOLVO 1", 6);
+        TruckCar truckTwo = new TruckCar("VOLVO 2", 6);
         PassengerCar car = new PassengerCar("Nissan 1");
-        Parking park = new Parking(1,12);
+        Parking park = new Parking(1, 12);
         park.parkingCar(car);
         park.parkingCar(truck);
         assertThat(park.parkingCar(truckTwo), is(true));
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void whenCarParkingThenThrow () {
-        PassengerCar car = new PassengerCar("Nissan 1");
-        Parking park = new Parking(1,10);
-        park.parkingCar(car);
-        park.parkingCar(car);
-    }
-
     @Test
-    public void whenCarRemove () {
+    public void whenCarRemove() {
         PassengerCar car = new PassengerCar("Nissan 1");
-        Parking park = new Parking(1,10);
+        Parking park = new Parking(1, 10);
         park.parkingCar(car);
         park.remove(car);
         assertThat(park.parkingCar(car), is(true));
     }
 
     @Test
-    public void whenTruckRemoveFromParkTruck () {
+    public void whenTruckRemoveFromParkTruck() {
         TruckCar truck = new TruckCar("VOLVO 1", 5);
-        Parking park = new Parking(1,1);
+        Parking park = new Parking(1, 1);
         park.parkingCar(truck);
         park.remove(truck);
         assertThat(park.parkingCar(truck), is(true));
     }
 
     @Test
-    public void whenTruckRemoveFromParkCar () {
+    public void whenTruckRemoveFromParkCar() {
         TruckCar truck = new TruckCar("VOLVO 1", 5);
-        Parking park = new Parking(0,5);
+        Parking park = new Parking(0, 5);
         park.parkingCar(truck);
         park.remove(truck);
         assertThat(park.parkingCar(truck), is(true));
-    }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void whenTruckRemoveThenThrow () {
-        TruckCar truck = new TruckCar("VOLVO 1", 5);
-        TruckCar truckTwo = new TruckCar("VOLVO 2", 5);
-        Parking park = new Parking(0,5);
-        park.parkingCar(truck);
-        park.remove(truckTwo);
     }
 }

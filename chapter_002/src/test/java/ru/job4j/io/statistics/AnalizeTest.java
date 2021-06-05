@@ -1,4 +1,4 @@
-package ru.job4j.statistics;
+package ru.job4j.io.statistics;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ public class AnalizeTest {
         List<User> current =
                 Arrays.asList(userCurr2, userCurr3, userCurr4);
 
-        Analize analize = new Analize();
+        ru.job4j.statistics.Analize analize = new ru.job4j.statistics.Analize();
         Info result = analize.diff(previous, current);
         assertThat(result.getDeleted(), is(1));
         assertThat(result.getChanged(), is(1));

@@ -1,4 +1,4 @@
-create database FullJoin;
+
 
 create table departments(
                             id serial primary key ,

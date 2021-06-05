@@ -4,8 +4,10 @@ public interface Shop {
     void applyDiscount();
 
     void setColor();
+
     void setSize();
 
     void setCondition();
+
     void setPrice();
 }

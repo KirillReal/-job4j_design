@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class GeneratorTest {
     private final Generator generator = (template, args) -> {
-        if(args.size() != 2) {
+        if (args.size() != 2) {
             throw new IllegalArgumentException();
         }
         return "Value1 = val1, value2 = val2";

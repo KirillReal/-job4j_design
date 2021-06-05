@@ -1,4 +1,4 @@
-create database filter;
+
 
 create table type (
                       id serial primary key,

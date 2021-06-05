@@ -11,9 +11,9 @@ public class ConnectionDemo {
         ConnectionRead connectionRead
                 = new ConnectionRead("./src/main/java/ru.job4j/resources/app.properties");
         connectionRead.load();
-        String url = connectionRead.get(ConnectionRead.url);
-        String login = connectionRead.get(ConnectionRead.login);
-        String password = connectionRead.get(ConnectionRead.password);
+        String url = connectionRead.get(ConnectionRead.URL);
+        String login = connectionRead.get(ConnectionRead.LOGIN);
+        String password = connectionRead.get(ConnectionRead.PASSWORD);
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());

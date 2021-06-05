@@ -5,6 +5,7 @@ import java.util.List;
 
 public class WareHouse implements Strategy {
     private final List<Food> foodList = new ArrayList<>();
+
     @Override
     public void add(Food food) {
         foodList.add(food);

@@ -9,7 +9,6 @@ public class TruckCar implements AbstractCar {
         this.size = size;
     }
 
-
     @Override
     public int getParkingSize() {
         return this.size;

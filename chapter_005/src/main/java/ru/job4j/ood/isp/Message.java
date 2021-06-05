@@ -1,9 +1,13 @@
 package ru.job4j.ood.isp;
 
 public interface Message {
-    void Send();
-    String Text();
-    String Subject();
-    String ToAddress ();
-    String FromAddress ();
+    void send();
+
+    String text();
+
+    String subject();
+
+    String toAddress();
+
+    String fromAddress();
 }

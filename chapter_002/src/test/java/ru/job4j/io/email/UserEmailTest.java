@@ -1,4 +1,4 @@
-package ru.job4j.email;
+package ru.job4j.io.email;
 
 import org.junit.Test;
 
@@ -10,23 +10,23 @@ import java.util.List;
 public class UserEmailTest {
     @Test
     public void convert() {
-        UserEmail test = new UserEmail();
-        List<UserEmail> source = Arrays.asList(
-                new UserEmail("user1", new HashSet<>(Arrays.asList(
+        ru.job4j.email.UserEmail test = new ru.job4j.email.UserEmail();
+        List<ru.job4j.email.UserEmail> source = Arrays.asList(
+                new ru.job4j.email.UserEmail("user1", new HashSet<>(Arrays.asList(
                         "xxx@ya.ru",
                         "foo@gmail.com",
                         "lol@mail.ru"))),
-                new UserEmail("user2", new HashSet<>(Arrays.asList(
+                new ru.job4j.email.UserEmail("user2", new HashSet<>(Arrays.asList(
                         "foo@gmail.com",
                         "ups@pisem.net"))),
-                new UserEmail("user3", new HashSet<>(Arrays.asList(
+                new ru.job4j.email.UserEmail("user3", new HashSet<>(Arrays.asList(
                         "xyz@pisem.net",
                         "vasya@pupkin.com"))),
-                new UserEmail("user4", new HashSet<>(Arrays.asList(
+                new ru.job4j.email.UserEmail("user4", new HashSet<>(Arrays.asList(
                         "ups@pisem.net",
                         "aaa@bbb.ru"))),
 
-                new UserEmail("user5", new HashSet<>(Collections.singletonList(
+                new ru.job4j.email.UserEmail("user5", new HashSet<>(Collections.singletonList(
                         "xyz@pisem.net")))
         );
         test.convert(source);

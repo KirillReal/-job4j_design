@@ -2,10 +2,10 @@ package ru.job4j.ood.srp;
 
 import java.io.FileOutputStream;
 
-public class SimpleMatrix implements MatrixExample{
+public class SimpleMatrix implements MatrixExample {
     //Первая проблема в том что возвращается строка вместо массива
     @Override
-    public String Matrix(int size) {
+    public String matrix(int size) {
         StringBuilder rsl = new StringBuilder();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -20,6 +20,7 @@ public class SimpleMatrix implements MatrixExample{
     }
     //Вторая проблема - разные абстракции:создание таблицы и её сохранение
     //Третья проблема - источник для сохранения таблицы создается в методе
+
     @Override
     public void saveMatrix(String matrix) {
         try (FileOutputStream out = new FileOutputStream("result.txt")) {

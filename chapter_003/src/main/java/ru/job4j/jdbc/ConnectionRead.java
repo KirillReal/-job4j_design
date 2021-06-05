@@ -8,13 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConnectionRead {
+    public static final String URL = "url";
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
     private static final Logger LOG = LoggerFactory.getLogger(ConnectionRead.class.getName());
     private final String path;
     private final Map<String, String> values;
-
-    public static final String url = "url";
-    public static final String login = "login";
-    public static final String password = "password";
 
     public ConnectionRead(String path) {
         this.path = path;
@@ -26,16 +25,16 @@ public class ConnectionRead {
             reader.lines()
                     .forEach(s -> {
                         String[] lines = s.split("=");
-                        if(lines.length == 2) {
-                            values.put(lines[0],lines[1]);
+                        if (lines.length == 2) {
+                            values.put(lines[0], lines[1]);
                         }
                     });
-        }catch (IOException e){
-            LOG.error("Ощибка четния файла конфигурации",e);
+        } catch (IOException e) {
+            LOG.error("Ощибка четния файла конфигурации", e);
         }
     }
 
-    public String get (String key) {
+    public String get(String key) {
         return values.get(key);
     }
 }
